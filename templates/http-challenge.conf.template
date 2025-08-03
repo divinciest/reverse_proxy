@@ -1,0 +1,20 @@
+# HTTP challenge server for {{ domain }}
+server {
+    listen 80;
+    server_name {{ domain }};
+    
+    root /var/www/html;
+    index index.html index.htm;
+    
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    
+    location ~ /\.well-known/acme-challenge {
+        allow all;
+        root /var/www/html;
+    }
+    
+    access_log /var/log/nginx/{{ domain }}_access.log;
+    error_log /var/log/nginx/{{ domain }}_error.log;
+} 

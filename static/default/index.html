@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generic Reverse Proxy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .status {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .info {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Generic Reverse Proxy</h1>
+        
+        <div class="status">
+            <h3>✅ Status: Running</h3>
+            <p>The generic reverse proxy is successfully running and serving this page.</p>
+        </div>
+        
+        <div class="info">
+            <h3>ℹ️ Information</h3>
+            <p>This is the default page served by the generic reverse proxy system.</p>
+            <p>To add your own frontend applications:</p>
+            <ul>
+                <li>Place your built frontend files in <code>static/[app-name]/</code></li>
+                <li>Add the domain configuration to <code>config/hosts.yaml</code></li>
+                <li>Rebuild the container to apply changes</li>
+            </ul>
+        </div>
+        
+        <div class="info">
+            <h3>🔧 Configuration</h3>
+            <p>Backend services should expose ports to the host machine and be configured in the hosts.yaml file.</p>
+            <p>All domains automatically get SSL certificates via Let's Encrypt.</p>
+        </div>
+    </div>
+</body>
+</html> 

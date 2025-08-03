@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporarily Unavailable - Please Try Again</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean, modern look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; /* Very dark, almost black for AMOLED feel */
+            overflow: hidden; /* Prevent scrollbars from pcontent canvas */
+        }
+        /* Custom styles for button gradient and shadow */
+        .btn-primary {
+            background-image: linear-gradient(to right, #4F46E5 0%, #6366F1 51%, #4F46E5 100%);
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.4); /* Darker shadow for dark mode */
+            transition: 0.5s;
+        }
+        .btn-primary:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+        .btn-primary:active {
+            transform: scale(0.98); /* Slight press effect */
+            box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.6);
+        }
+
+        /* Glassy effect for the card */
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.01); /* Super transparent white */
+            backdrop-filter: blur(60px); /* Max frosted glass effect */
+            -webkit-backdrop-filter: blur(60px); /* For Safari compatibility */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly brighter subtle border */
+            box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.4), 0 0 20px 0 rgba(255, 255, 255, 0.05); /* Deeper shadow and a subtle shine */
+        }
+
+        /* Canvas for pcontents background */
+        #pcontents-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Send behind content */
+        }
+
+        /* Text shadow for subtle glow */
+        .text-glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 15px rgba(100, 100, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 text-white">
+    <!-- Pcontents Canvas -->
+    <canvas id="pcontents-canvas"></canvas>
+
+    <div class="glass-card rounded-xl shadow-2xl p-10 max-w-lg w-full text-center transform hover:scale-105 transition-all duration-300 ease-in-out">
+        <!-- Replaced with your SVG logo -->
+        <div class="flex justify-center mb-6">
+            <svg
+                width="100.855mm"
+                height="36.124001mm"
+                viewBox="0 0 100.855 36.124001"
+                version="1.1"
+                id="svg1"
+                xml:space="preserve"
+                inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+                sodipodi:docname="logo.svg"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:svg="http://www.w3.org/2000/svg">
+                <sodipodi:namedview
+                    id="namedview1"
+                    pagecolor="#ffffff"
+                    bordercolor="#000000"
+                    borderopacity="0.25"
+                    inkscape:showpageshadow="2"
+                    inkscape:pageopacity="0.0"
+                    inkscape:pagecheckerboard="0"
+                    inkscape:deskcolor="#d1d1d1"
+                    inkscape:document-units="mm"
+                    inkscape:zoom="0.9411127"
+                    inkscape:cx="318.24031"
+                    inkscape:cy="182.2311"
+                    inkscape:window-width="1920"
+                    inkscape:window-height="986"
+                    inkscape:window-x="-11"
+                    inkscape:window-y="-11"
+                    inkscape:window-maximized="1"
+                    inkscape:current-layer="layer1" />
+                <defs id="defs1">
+                    <pattern
+                        id="EMFhbasepattern"
+                        patternUnits="userSpaceOnUse"
+                        width="6"
+                        height="6"
+                        x="0"
+                        y="0" />
+                </defs>
+                <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1">
+                    <g id="g2" transform="translate(-70.908333,-112.04297)">
+                        <path
+                            style="fill:#BFC9D1"
+                            d="m 86.812652,147.7928 c -0.13662,-0.36148 -0.70966,-2.02057 -3.552649,-10.28585 -1.06071,-3.08377 -3.82294,-11.21571 -4.88609,-14.38457 -1.28348,-3.82555 -1.97255,-5.65957 -2.36499,-6.29455 -0.43226,-0.6994 -2.27795,-2.05246 -3.15911,-2.31592 -0.33976,-0.10158 -0.91559,-0.23469 -1.27961,-0.2958 -0.66187,-0.11111 -0.66187,-0.11111 -0.66187,-1.15534 0,-1.04422 0,-1.04422 9.48675,-1.00686 9.486759,0.0374 9.486759,0.0374 9.539689,1.05222 0.0515,0.98809 0.0409,1.01487 -0.40456,1.01487 -0.7725,0 -3.15525,0.54069 -3.57545,0.81134 -0.299899,0.19316 -0.397119,0.42381 -0.397119,0.94216 0,0.41904 1.340639,4.73101 3.442139,11.07116 1.89318,5.71163 3.48353,10.49544 3.53411,10.63067 0.13108,0.35044 0.23387,0.18922 0.50581,-0.79325 0.13163,-0.47554 0.4369,-1.5 0.67839,-2.27659 0.96305,-3.09698 2.13225,-6.81534 2.77489,-8.82489 0.66402,-2.07638 1.72325,-5.48778 2.2469,-7.23641 0.14535,-0.48537 0.33152,-1.08105 0.41371,-1.32373 0.0822,-0.24269 0.47364,-1.48505 0.869908,-2.76081 0.72047,-2.31956 0.72047,-2.31956 3.4083,-2.29447 2.68783,0.0251 2.68783,0.0251 2.98239,0.90758 0.162,0.48537 0.78625,2.27241 1.38722,3.9712 0.60096,1.69879 1.59343,4.51834 2.20547,6.26567 4.17707,11.92503 5.16616,14.70418 5.35028,15.03319 0.18137,0.32409 0.23262,0.19916 1.31585,-3.20784 3.59194,-11.29738 6.38249,-19.31211 6.38249,-19.31211 0,0 -1.42238,-1.04959 -4.65928,-3.67855 l 8.99971,0.1094 c 0.0554,-0.0367 0.052,6.49386 0.052,6.49386 l -1.87359,-1.3915 c 0,0 -1.04723,2.97455 -1.18605,3.39452 -0.17648,0.53391 -0.68922,2.00325 -1.13943,3.26521 -0.45021,1.26196 -1.2497,3.56526 -1.77665,5.11844 -4.07656,12.01577 -6.45798,18.88615 -6.59322,19.02139 -0.0764,0.0764 -1.24371,0.11678 -2.59395,0.0897 -2.45498,-0.0493 -2.45498,-0.0493 -3.91324,-4.10875 -0.80204,-2.23269 -1.68927,-4.73455 -1.97163,-5.55968 -0.28235,-0.82512 -1.08122,-3.08871 -1.77525,-5.03018 -0.69404,-1.94148 -1.73947,-4.88016 -2.32319,-6.53042 -0.58371,-1.65025 -1.244,-3.47262 -1.46731,-4.04971 -0.45234,-1.16899 -0.10158,-2.04766 -3.659898,9.16815 -0.58516,1.8444 -1.56617,4.90222 -2.18003,6.79516 -0.61386,1.89294 -1.53879,4.7522 -2.05539,6.35392 -0.93928,2.91221 -0.93928,2.91221 -3.45689,2.9612 -2.47854,0.0482 -2.51997,0.0427 -2.66955,-0.353 z"
+                            id="path1"
+                            sodipodi:nodetypes="sssssssccsssssssssssssscsscccccsscscsssssssssss" />
+                        <path
+                            style="fill:#FFFFFF;stroke-width:0.893679"
+                            d="m 132.50502,115.84909 c -0.1221,0.32305 -0.63421,1.80574 -3.17493,9.19225 -0.94794,2.7559 -3.41649,10.02325 -4.3666,12.8552 -1.14702,3.41881 -1.76283,5.05784 -2.11354,5.62531 -0.38631,0.62504 -2.03576,1.83424 -2.82324,2.06969 -0.30363,0.0908 -0.81824,0.20973 -1.14356,0.26435 -0.5915,0.0993 -0.5915,0.0993 -0.5915,1.0325 0,0.9332 0,0.9332 8.47812,0.89981 8.47812,-0.0334 8.47812,-0.0334 8.52542,-0.94035 0.046,-0.88303 0.0366,-0.90696 -0.36154,-0.90696 -0.69037,0 -2.81979,-0.48321 -3.19531,-0.72508 -0.26802,-0.17263 -0.3549,-0.37875 -0.3549,-0.84199 0,-0.37449 1.1981,-4.22801 3.07617,-9.89407 1.6919,-5.10437 3.11316,-9.37956 3.15836,-9.50041 0.11715,-0.31318 0.20901,-0.1691 0.45203,0.70891 0.11764,0.42498 0.39045,1.34052 0.60627,2.03454 0.86066,2.76771 1.90555,6.09073 2.47986,7.88662 0.59342,1.85562 1.54003,4.90432 2.00801,6.46704 0.12989,0.43376 0.29627,0.96611 0.36972,1.18299 0.0735,0.21688 0.42329,1.32715 0.77742,2.46728 0.64387,2.07294 0.64387,2.07294 3.04593,2.05052 2.40206,-0.0224 2.40206,-0.0224 2.6653,-0.81109 0.14478,-0.43376 0.70266,-2.03081 1.23973,-3.54898 0.53707,-1.51817 1.42402,-4.03795 1.97099,-5.5995 3.73296,-10.65716 4.61689,-13.14082 4.78143,-13.43485 0.16209,-0.28964 0.20789,-0.17799 1.17595,2.86678 3.21004,10.09623 4.6857,15.28733 4.6857,16.48342 0,0.7313 -0.0396,0.8099 -0.59149,1.17344 -0.73264,0.48261 -2.10803,0.84942 -3.35343,0.89437 -0.94477,0.0341 -0.94477,0.0341 -0.94477,1.02684 0,0.99275 0,0.99275 6.38815,1.00247 6.38817,0.01 6.38817,0.01 6.38817,-0.98508 0,-0.99393 -4.2e-4,-0.99484 -0.477,-1.03115 -0.95446,-0.0727 -2.56452,-0.87837 -3.37488,-1.68871 -0.22546,-0.22546 -0.52398,-0.67219 -0.6634,-0.99274 -0.41732,-0.95953 -0.85781,-2.10719 -1.16207,-3.02767 -0.15772,-0.47714 -0.61594,-1.79026 -1.01829,-2.91805 -0.40234,-1.12779 -1.11683,-3.1862 -1.58775,-4.57424 -3.64314,-10.73825 -5.77137,-16.87817 -5.89223,-16.99903 -0.0683,-0.0683 -1.11148,-0.10436 -2.31816,-0.0802 -2.19396,0.044 -2.19396,0.044 -3.49718,3.6719 -0.71677,1.99531 -1.50967,4.23117 -1.76201,4.96857 -0.25233,0.7374 -0.96626,2.76032 -1.5865,4.49537 -0.62025,1.73506 -1.55453,4.3613 -2.07619,5.83611 -0.52165,1.47479 -1.11174,3.1034 -1.3113,3.61914 -0.40425,1.0447 -0.0908,1.82995 -3.27078,-8.19339 -0.52295,-1.6483 -1.39965,-4.38101 -1.94825,-6.07269 -0.54859,-1.69169 -1.37518,-4.24695 -1.83686,-5.67837 -0.83941,-2.60259 -0.83941,-2.60259 -3.08935,-2.64637 -2.21502,-0.0431 -2.25205,-0.0382 -2.38572,0.31547 z"
+                            id="path1-1" />
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <h1 class="text-4xl font-extrabold text-white mb-4 leading-tight text-glow">
+            Oops! Momentary Glitch.
+        </h1>
+
+        <p class="text-xl text-gray-200 mb-6 text-glow">
+            We're currently experiencing some technical difficulties.
+            Our team is on it, working tirelessly to get things back online!
+        </p>
+
+        <p class="text-md text-gray-400 mb-8">
+            Please try refreshing the page in a moment, or check back soon.
+            Your patience is greatly appreciated!
+        </p>
+
+        <!-- Refresh Button with gradient and more pronounced hover effect -->
+        <button onclick="location.reload()"
+                class="btn-primary py-4 px-8 rounded-full font-bold text-lg focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75">
+            Refresh Page
+        </button>
+
+        <!-- Optional: Link back to the home page if applicable -->
+        <p class="mt-10 text-sm text-gray-500">
+            &copy; 2025 Your News Platform. All rights reserved.
+        </p>
+    </div>
+
+    <script>
+        // JavaScript for the pcontents effect
+        const canvas = document.getElementById('pcontents-canvas');
+        const ctx = canvas.getContext('2d');
+        let pcontents = [];
+        const numPcontents = 250; /* Increased number of pcontents */
+        const pcontentSize = 1.5;
+        const pcontentSpeed = 0.5;
+
+        // Function to set canvas dimensions on resize
+        function setCanvasDimensions() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        // Pcontent class
+        class Pcontent {
+            constructor(x, y) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = y || Math.random() * canvas.height;
+                this.size = Math.random() * pcontentSize + 0.5; // Random size
+                this.speedX = (Math.random() - 0.5) * pcontentSpeed; // Random horizontal speed
+                this.speedY = (Math.random() - 0.5) * pcontentSpeed; // Random vertical speed
+                this.color = 'rgba(255, 255, 255, ' + (Math.random() * 0.3 + 0.05) + ')'; // Semi-transparent white
+            }
+
+            // Update pcontent position
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wrap pcontents around the screen
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+
+                // Slight random change to direction for more organic movement
+                if (Math.random() < 0.01) {
+                    this.speedX = (Math.random() - 0.5) * pcontentSpeed;
+                    this.speedY = (Math.random() - 0.5) * pcontentSpeed;
+                }
+            }
+
+            // Draw pcontent
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Initialize pcontents
+        function init() {
+            pcontents = [];
+            for (let i = 0; i < numPcontents; i++) {
+                pcontents.push(new Pcontent());
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            // Create a fading trail effect instead of full clear
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.1)'; /* Semi-transparent dark overlay for trails */
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < pcontents.length; i++) {
+                pcontents[i].update();
+                pcontents[i].draw();
+
+                // Connect pcontents if close enough
+                for (let j = i; j < pcontents.length; j++) {
+                    const dx = pcontents[i].x - pcontents[j].x;
+                    const dy = pcontents[i].y - pcontents[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) { // Distance threshold for drawing lines
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - (distance / 1000)})`; // Fading line
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(pcontents[i].x, pcontents[i].y);
+                        ctx.lineTo(pcontents[j].x, pcontents[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate); // Loop the animation
+        }
+
+        // Initialize on window load and handle resize
+        window.onload = function() {
+            setCanvasDimensions(); // Set initial dimensions
+            init(); // Initialize pcontents
+            animate(); // Start animation loop
+        };
+
+        window.addEventListener('resize', () => {
+            setCanvasDimensions();
+            init(); // Re-initialize pcontents to adapt to new size
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+web/letsencrypt-data copy/*
+web/letsencrypt-data/*
+web/node_modules
+database/mongo-data
+backend/bmo/files
+backend/bmo/uploads
+backend/bmo/backups/*
+backend/bmo/backups
+backend/bmo/.env
+web/.env
+backend/bmo/error.log
+backend/bmo/error_log.txt 
+backend/bmo/api_cache/*
+datasets/economic_network/economy_network_viz.json
+backend/bmo/api_cache/
+backend/bmo/bug_reports/*
+backend/bmo/health_status/*
+backend/bmo/health_monitor.log
+backend/bmo/health_status/2025-06-20.json
+**/__pycache__/
+**/*.pyc
+backend/bmo/llm_cache/*
+backend/bmo/task_logs/*
+backend/bmo/client.log
+backend/task_logs/*
+

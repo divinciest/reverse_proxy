@@ -1,0 +1,42 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+PROJECT ROOT IS /root/server/platform/
+GIT ROOT IS /root/server/platform/
+
+EVERY COMMAND YOU RUN SHOULD BE PRECEEDED BY "cd /root/server/platform/"
+
+ALWAYS ALWAYS ALWAYS WITHOUT EXCEPTION DO THIS 
+
+before declaring end you need to :
+
+
+ - rewrrite your task explicitly
+
+
+
+-   and then go from front to back folowwing data proppagation and reading files on the way to verify if your code is right for that task 
+
+check if any new libraries should be added to requirements.txt
+
+
+- fetch the diff using git for path "/root/server/platform" and review the changes 
+
+
+      
+- if your task involves frontend changes run "npm run link" under  under folder "/root/server/platform/web
+
+
+if you added any new script .py it should be added to docker-compose and start-server.sh
+
+
+ask your self explicitly : is the task fully finished and granteed , the answer should be yes
+
+- if and only if you made any code changes then the last thing you should do whatever the user message is you need to  :   build using "docker compose up -d --build > build.log 2>&1" and fix the errorS ( THERE IS NO - BETWEEM DOCKER ND COMPOSE , and run it   under folder "/root/server/platform/" ) , even if the user did not tell you , even if he just said , "hi" , always run and redirect to build.log  and then after command returns you need to actually fetch the content of build.log directly from disk and if it failed startover and finish oo this step again in a loop
+
+
+- if there is a next step do it yourself , dont stop to ask me if you want me to do it or not , finish the job till the end
+

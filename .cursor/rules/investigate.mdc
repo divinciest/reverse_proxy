@@ -1,0 +1,53 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+Stop the changes
+
+enter investigation mode
+
+level of suspicioin : extreme 
+
+level of acceptance : zero 
+
+level of patience : max
+
+attention to details : max 
+
+skipping ; zero 
+
+making assumptions : no assumptions 
+
+
+start point : ground level 
+
+method of function : trace data and logoc flow by reading code 
+
+
+make changes : no 
+
+do what : investigate  
+
+
+ TECHNIQUE : travers source code function by function loading files and reading code 
+
+
+conclude fast : never
+
+when to conclude : after thousands of operations
+
+
+
+
+
+
+
+
+
+TECHNIQUE : travers source code function by function loading files and reading code 
+
+
+you need to traverse code base back to front ebefore conclusion
+

@@ -1,0 +1,120 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+PROJECT ROOT IS /root/server/platform/
+GIT ROOT IS /root/server/platform/
+
+EVERY COMMAND YOU RUN SHOULD BE PRECEEDED BY "cd /root/server/platform/"
+
+
+### Agent Rules
+
+Before declaring the task is complete, I must perform the following steps in order:
+
+1.  **Restate the Task:** Explicitly write down the user's task that I am trying to solve. write it to task.txt under root
+
+2.  **Verify Code Propagation:**
+    *   Go through the application from front to back.
+    *   Follow the data propagation paths.
+    *   Read files along the way to verify that the implemented code is correct and addresses the stated task.
+
+3.  **Check Dependencies:**
+    *   Review `requirements.txt` and verify if any new libraries need to be added.
+
+4.  **Review Changes:**
+    *   Fetch the `git diff` for the entire `/root/server/platform` directory.
+    *   Carefully review all the changes made during the session.
+    *  Do not edit task.txt in the middle of work
+5.  **Frontend Tasks (if applicable):**
+    *   If any changes were made to the frontend, navigate to `/root/server/platform/web` and run `npm run lint`.
+
+6.  **Backend Script Registration (if applicable):**
+    *   If any new `.py` script has been added, ensure it is correctly referenced in `docker-compose.yml` and the `start-server.sh` script.
+
+7.  **Final Confirmation:**
+    *   Load the task from task.txt    
+    *   Ask myself explicitly: "Is the task fully finished and guaranteed to be working?" The answer must be "yes."
+
+8.  **Build and Verify (MANDATORY FINAL STEP):**
+    *   This is the absolute last step, regardless of the user's message.
+    *   Navigate to the `/root/server/platform/` directory.
+    *   Run the command: `docker compose up -d --build > build.log 2>&1`.
+    *   After the command finishes, read the `build.log` file from disk.
+    *   If the build fails, I must loop back and fix the errors, repeating this build-and-verify step until it succeeds.
+
+9.  **Autonomy:**
+    *   If there is a next step, I must perform it myself without asking for permission. I must see the job through to the end.     
+
+
+
+if you need to add a collection see globals.py for global variables declaration for it  and see the seeding in database.py
+
+ALWAYS USE EXTREMLY MINIMALISTIC AND LAZY APPROACHES THE SHORTEST PATH TO ACCOMBLISH THE TASK
+
+
+WHEN YOU ADD NEW .py FILES TO BACKEND DONT FORGET TO ADD THEM TO MOUNTED VOLUMES IN docker.compose.yml
+
+
+AFTER ADDING A NEW ROUTE CONSEDER IF I SHOULD BE PUT IN "EXCLUDED_CACHE_PATHS"
+
+
+
+general important notes : 
+
+do not perform any changes i did not explicitly ask you to do
+
+
+dont change functions names , do not do that , dont change a function name
+
+
+do not remove code that exists and has unitility unless i explicitly asked you to remoive it 
+
+
+
+even if a code portions looks irrelevant or useless do not remove it , dont remove functions , dont remove code snippets
+DONT REMOVE CODE YOU ARE NOT ASKED SPESIFICALLY TO REMOVE
+
+
+
+when i ask you to add a feature dont add features i did not spesifically as for , to expand the word or improve uüon my instruction , apply exactly and solely the demanded changes
+
+
+give complete code that is actually executable , dont replace code with comments like "this stays the same" or "keep this the same" because i will copy your code as is and paste it and it should be actual code
+
+dont give abstruct or example vvariable name like "yourVariable" , "ExampleVariable" or ExampleComponent
+
+
+dont explain how something can be done , instead perform it yourself
+
+
+
+DONT WRITE COMMENTS EXPLAINING YOUR WORK OR WHY YOU HAVE DONE SOMETHING ; DONT DO THAT
+
+DONT SUGGEST CHANGES THAT INVOLVE REPLACING CODE WITH COMMENT 
+
+IF YOU REMOVE A FUNCTION JSUT REMOVE IT DONT COMMENT ON WHY YOU DID SO INSIDE THE CODE , BUT DONT REMOVE FUNCTIONS THAT SEEM TO YOU NOT USED , DONT REMOVE CODE RAMDOMLY 
+
+
+
+DO NOT CHANGE THE LAYOUT OR THE COLOR OR THE ICONS OF ANY PAGE IN THE WEBSITE UNLESS I EXPLLICITLY AND DIRECTLY ASKED FOR THAT
+
+IF I asked you explicitly to perform a task dont say that it is already satisfied, because it is not , it just cannot be already satisfied because i have tested before telling you anything
+
+
+
+dont hallucinate , make only very certain changes , dont assume things exist when there is not defenitive prrof they do , dont postpone work and use a component that doesnt exist 
+
+
+always run git diff after your changes to check them
+
+
+
+when there is an issue you need to do a deep investigation first loading all relevant codebase and following dataproppagation function to function and come back with phsical proof of the diagnosis , and ask user hwat he thinks before implmenting it
+
+ A rigorous investigation demands that every assumption is verified with evidence. 
+
+
+
+FOR LOGGING MEBER USE PRINT, see logger.py

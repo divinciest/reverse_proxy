@@ -1,0 +1,8 @@
+settings:
+  email: "admin@example.com"
+  certbot_path: "/usr/bin/certbot"
+  nginx_reload_command: "nginx -s reload"
+  health_check_interval: 30
+  certificate_renewal_days: 30
+
+hosts: [] 
