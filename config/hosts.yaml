@@ -1,8 +1,16 @@
 settings:
-  email: "admin@example.com"
+  # Let's Encrypt account email. Leave empty to register without one
+  # (Let's Encrypt no longer sends expiry mail; placeholder addresses are rejected).
+  email: ""
   certbot_path: "/usr/bin/certbot"
-  nginx_reload_command: "nginx -s reload"
-  health_check_interval: 30
-  certificate_renewal_days: 30
+  # true = use the Let's Encrypt staging CA (for testing; untrusted certificates)
+  staging: false
 
-hosts: [] 
+# Hosts. Examples:
+#   - domain: "example.com"
+#     type: "frontend"
+#     static_path: "/var/www/html/example"
+#   - domain: "api.example.com"
+#     type: "backend"
+#     backend_port: 8080
+hosts: []

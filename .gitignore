@@ -24,3 +24,24 @@ backend/bmo/task_logs/*
 backend/bmo/client.log
 backend/task_logs/*
 
+
+# Let's Encrypt runtime state (private keys, accounts) - never commit
+letsencrypt/accounts/
+letsencrypt/archive/
+letsencrypt/csr/
+letsencrypt/keys/
+letsencrypt/live/
+letsencrypt/renewal/
+letsencrypt/renewal-hooks/
+
+# Runtime logs
+logs/*.log
+
+# Deployed sites (only the bundled examples are tracked)
+static/*
+!static/default/
+!static/app1/
+!static/app2/
+
+# Per-server compose overrides
+docker-compose.override.yml

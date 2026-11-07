@@ -1,39 +1,32 @@
 # Generic Reverse Proxy
-FROM nginx:1.21.3-alpine
+# nginx 1.30 on Alpine 3.24 ships certbot 5.x, which supports ACME Renewal
+# Information (ARI) and lifetime-relative renewal windows (needed for the
+# shorter Let's Encrypt certificate lifetimes rolling out from 2027).
+FROM nginx:1.30.6-alpine
 
-# Install required packages
 RUN apk add --no-cache \
     certbot \
-    certbot-nginx \
+    openssl \
     python3 \
-    py3-pip \
     py3-yaml \
     py3-jinja2 \
     py3-requests \
     netcat-openbsd
 
-# Install Python dependencies
-RUN pip3 install pyyaml jinja2 requests
+# ACME HTTP-01 challenge files are written here by certbot --webroot
+RUN mkdir -p /etc/letsencrypt /var/www/html /var/www/acme /app/config /app/scripts /app/templates /var/log/nginx
 
-# Create necessary directories
-RUN mkdir -p /etc/letsencrypt /var/www/html /app/config /app/scripts /app/templates /var/log/nginx
-
-# Copy configuration and scripts
 COPY config/ /app/config/
 COPY scripts/ /app/scripts/
 COPY templates/ /app/templates/
 
-# Copy nginx base configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY options-ssl-nginx.conf /etc/letsencrypt/options-ssl-nginx.conf
 
-# Set permissions
-RUN chmod +x /app/scripts/*.py
+RUN chmod +x /app/scripts/*.py /app/scripts/*.sh
 
-# Expose ports
 EXPOSE 80 443
 
-# Use dynamic startup script
 COPY startup.sh /startup.sh
 RUN chmod +x /startup.sh
-ENTRYPOINT ["/startup.sh"] 
+ENTRYPOINT ["/startup.sh"]

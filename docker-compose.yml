@@ -1,14 +1,12 @@
-version: '3.8'
-
 services:
-  # Generic Reverse Proxy - PRODUCTION READY
+  # Generic Reverse Proxy
+  # Host networking: backend templates proxy to http://localhost:<port>, which
+  # must be the host itself, not the container.
   reverse-proxy:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
+    network_mode: host
     volumes:
       - ./config:/app/config
       - ./scripts:/app/scripts
@@ -17,12 +15,9 @@ services:
       - ./letsencrypt:/etc/letsencrypt
       - ./logs:/var/log/nginx
       - ./web:/var/www/html/advisorassist  # Mount the existing web app
-    networks:
-      - proxy-network
     restart: always
     environment:
       - CONFIG_FILE=/app/config/hosts.yaml
-
-networks:
-  proxy-network:
-    driver: bridge
+      # Optional overrides (seconds):
+      # - RENEW_INTERVAL_SECONDS=43200
+      # - RENEW_MAX_JITTER_SECONDS=3600

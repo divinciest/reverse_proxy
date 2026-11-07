@@ -1,20 +1,22 @@
-# HTTP challenge server for {{ domain }}
+# HTTP server for {{ domain }}: ACME challenges, then redirect to HTTPS
 server {
     listen 80;
     server_name {{ domain }};
-    
-    root /var/www/html;
-    index index.html index.htm;
-    
+
+    location ^~ /.well-known/acme-challenge/ {
+        root {{ acme_webroot }};
+        default_type text/plain;
+        try_files $uri =404;
+    }
+
     location / {
-        try_files $uri $uri/ =404;
+{%- if has_cert %}
+        return 301 https://$host$request_uri;
+{%- else %}
+        return 404;
+{%- endif %}
     }
-    
-    location ~ /\.well-known/acme-challenge {
-        allow all;
-        root /var/www/html;
-    }
-    
+
     access_log /var/log/nginx/{{ domain }}_access.log;
     error_log /var/log/nginx/{{ domain }}_error.log;
-} 
+}
