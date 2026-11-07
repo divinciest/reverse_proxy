@@ -25,7 +25,9 @@ hosts:
 ```
 
 After editing, restart the container (`docker compose restart`). It issues missing
-certificates and regenerates the configs on startup.
+certificates and regenerates the configs on startup. Domains whose certificate could
+not be issued (for example, DNS not pointing here yet) are retried every 12 hours
+and go live automatically once issuance succeeds.
 
 ## Certificates
 

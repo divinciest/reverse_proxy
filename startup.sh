@@ -37,6 +37,11 @@ renewal_loop() {
         python3 /app/scripts/cert-manager.py renew-certificates || log "renewal run failed; will retry next cycle"
         sleep "$RENEW_INTERVAL_SECONDS"
         sleep "$(random_jitter)"
+        # Retry domains that still have no certificate (e.g. DNS was not
+        # pointing here yet) and publish their HTTPS config once issued.
+        # Twice a day stays far below Let's Encrypt's failed-validation limit.
+        python3 /app/scripts/cert-manager.py obtain-certificates || log "some certificates are still missing"
+        python3 /app/scripts/config-generator.py generate || log "config generation failed; keeping previous config"
     done
 }
 
