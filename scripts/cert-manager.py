@@ -18,7 +18,9 @@ import yaml
 CONFIG_FILE = os.environ.get("CONFIG_FILE", "/app/config/hosts.yaml")
 LETSENCRYPT_DIR = "/etc/letsencrypt"
 ACME_WEBROOT = "/var/www/acme"
-DEPLOY_HOOK = "/app/scripts/reload-nginx.sh"
+# Run through sh so a missing executable bit (e.g. scripts/ mounted from a
+# Windows checkout) cannot break the hook.
+DEPLOY_HOOK = "sh /app/scripts/reload-nginx.sh"
 
 # RFC 1123 hostname: labels of letters/digits/hyphens, no leading/trailing hyphen
 DOMAIN_RE = re.compile(
