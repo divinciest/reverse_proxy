@@ -146,6 +146,24 @@ class ConfigGeneratorTest(unittest.TestCase):
         self.assertFalse(any("bad" in name for name in configs))
         self.assertNotIn("dynamic-api_example_org.conf", configs)
 
+    def test_frontend_proxy_paths_route_to_local_ports(self):
+        configs = config_generator.generate_all_configs({"hosts": [
+            {"domain": "has.example.org", "type": "frontend", "static_path": "/var/www/html/a",
+             "proxy_paths": [{"path": "/llm/", "port": 8790}]},
+        ]})
+        conf = configs["dynamic-has_example_org.conf"]
+        self.assertIn("location ^~ /llm/ {", conf)
+        self.assertIn("proxy_pass http://127.0.0.1:8790/;", conf)
+        self.assertLess(conf.index("location ^~ /llm/"), conf.index("location / {"))
+
+    def test_invalid_proxy_paths_are_rejected(self):
+        for bad in ({"path": "/llm", "port": 8790}, {"path": "/a b/", "port": 1},
+                    {"path": "/x/", "port": 70000}, {"path": "/x/;", "port": 1}, {"path": "/x/"}):
+            configs = config_generator.generate_all_configs({"hosts": [
+                {"domain": "has.example.org", "type": "frontend", "static_path": "/a", "proxy_paths": [bad]},
+            ]})
+            self.assertNotIn("dynamic-has_example_org.conf", configs, bad)
+
     def test_failed_validation_restores_previous_configs(self):
         with tempfile.TemporaryDirectory() as conf:
             conf_dir = Path(conf)

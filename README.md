@@ -22,6 +22,12 @@ hosts:
   - domain: "api.example.com"      # proxied to a service on the host
     type: "backend"
     backend_port: 8080
+  - domain: "app.example.com"      # SPA plus path prefixes proxied to local services
+    type: "frontend"
+    static_path: "/var/www/html/app"
+    proxy_paths:
+      - path: "/llm/"              # https://app.example.com/llm/x -> http://127.0.0.1:8790/x
+        port: 8790
 ```
 
 After editing, restart the container (`docker compose restart`). It issues missing

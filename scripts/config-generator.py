@@ -54,15 +54,36 @@ def valid_hosts(config: Dict) -> List[Dict]:
     return hosts
 
 
+PROXY_PATH_RE = re.compile(r"^/[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*/$")
+
+
+def validate_port(value: object, label: str) -> int:
+    port = int(value)
+    if not 0 < port < 65536:
+        raise ValueError(f"invalid port {port} for {label}")
+    return port
+
+
+def proxy_paths(host: Dict) -> List[Dict]:
+    """Optional path prefixes of a frontend that proxy to local services,
+    e.g. [{"path": "/llm/", "port": 8790}]. The prefix is stripped."""
+    routes = []
+    for route in host.get("proxy_paths") or []:
+        path = str(route.get("path", ""))
+        if not PROXY_PATH_RE.match(path):
+            raise ValueError(f"invalid proxy path {path!r} (must look like /name/)")
+        routes.append({"path": path, "port": validate_port(route["port"], path)})
+    return routes
+
+
 def host_config(host: Dict) -> str:
     domain = host["domain"]
     host_type = host.get("type")
     if host_type == "frontend":
-        return render("frontend.conf.template", domain=domain, static_path=host["static_path"])
+        return render("frontend.conf.template", domain=domain, static_path=host["static_path"],
+                      proxy_paths=proxy_paths(host))
     if host_type == "backend":
-        port = int(host["backend_port"])
-        if not 0 < port < 65536:
-            raise ValueError(f"invalid backend_port {port} for {domain}")
+        port = validate_port(host["backend_port"], domain)
         return render("backend.conf.template", domain=domain, backend_port=port)
     raise ValueError(f"unknown host type {host_type!r} for {domain}")
 
